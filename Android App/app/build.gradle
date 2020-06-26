@@ -4,8 +4,8 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.mp.trafficsignrecognition"
-        minSdkVersion 15
+        applicationId "com.mp.camera2app"
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -17,7 +17,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/jniLibs/'] } }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
@@ -26,6 +38,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testİmplementation 'junit:junit:4.12'
     androidTestİmplementation 'androidx.test:runner:1.2.0'
-    androidTestİmplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation project(path: ':openCVLibrary342')
+    androidTestİmplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'org.tensorflow:tensorflow-lite:+'
 }
